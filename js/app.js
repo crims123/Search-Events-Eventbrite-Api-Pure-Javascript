@@ -7,7 +7,6 @@ const requestApi = new request();
 document.addEventListener('DOMContentLoaded', loadInitialState);
 seachButton.addEventListener('click', handleSearch)
 
-
 function loadInitialState () {
     interface.loadCategories();
 }

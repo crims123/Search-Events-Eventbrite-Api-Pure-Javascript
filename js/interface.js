@@ -23,6 +23,13 @@ class userInterface {
         }
         const events= requestApi.requestEvents(event.value, category.value)
             .then(events => {
+                if (events.length === 0) {
+                    this.showMessage('Not results please try it with another keywords'
+                    , 'alert alert-danger mt-4');
+                    setTimeout(() => {
+                        this.clearMessage();
+                    }, 2000)
+                }
                 events.forEach(event => {
                     eventResults.innerHTML += `
                          <div class="col-md-4 mb-4">
@@ -41,8 +48,21 @@ class userInterface {
                               </div>
                          </div>
                     `;
-               })
+                })
             })
+    }
+
+    showMessage (mesaggeContent, className) {
+        const messageContainer = document.querySelector('#buscador');
+        const message = document.createElement('div');
+        message.className = className;
+        message.textContent = mesaggeContent;
+        messageContainer.appendChild(message)
+    }
+
+    clearMessage () {
+        const messageContainer = document.querySelector('#buscador');
+        messageContainer.children[4].remove()
     }
 
 }
